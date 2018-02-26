@@ -13,6 +13,7 @@ typedef struct cString {
 
 
 size_t cString_len(cString *cStr) {
+  if (!cStr) return 0;
   return cStr->len - 1;
 }
 
@@ -31,6 +32,8 @@ cString *cString_new() {
 
 
 int cString_set(cString *string, char *text) {
+  if (!string || !text) return -1;
+
   string->text = strdup(text);
 
   if (!string->text) {
@@ -47,12 +50,14 @@ cString *cString_newStr(char *text) {
   cString *cStr = cString_new();
   if (!cStr) return NULL;
 
-  cString_set(cStr, text);
+  if (text) cString_set(cStr, text);
   return cStr;
 }
 
 
 int cString_append(cString *string1, cString *string2) {
+  if (!string1 || !string2) return -1;
+
   size_t str1Len = cString_len(string1);
   size_t str2Len = cString_len(string2);
   size_t newLen = str1Len + str2Len + 1;
