@@ -240,14 +240,15 @@ void circleBres(struct bitmapData *bitmap, int xc, int yc, int r)
 }
 
 
-
-
 int main() {
   int prgmStatus = 0;
   int imgWidth = 1024;
   int imgHeight = 1024;
 
   struct bitmapData *myPicture = newBitmap(imgWidth, imgHeight);
+  if (!myPicture) {
+    return -1;
+  }
 
   int radiusStart = (imgHeight > imgWidth) ? imgHeight/2 : imgWidth/2;
   while (--radiusStart > 0) {
